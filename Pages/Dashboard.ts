@@ -5,12 +5,16 @@ export class Dashboard{
     readonly page : Page;
     readonly swagLabs : Locator;
     readonly productLabel : Locator;
+    readonly cartIcon : Locator;
+    readonly yourCartLabel : Locator;
 
 
     constructor(page : Page){
         this.page = page;
         this.swagLabs = page.locator('div.app_logo')
         this.productLabel = page.getByText('Products');
+        this.cartIcon = page.locator("//a[contains(@class,'shopping_cart')]");
+        this.yourCartLabel = page.getByText('Your Cart', { exact: true });
     }
 
     /**
@@ -36,11 +40,31 @@ export class Dashboard{
         }
     }
 
+    /**
+     * Clicks on the Add Product and check remove.
+     * @param proName 
+     */
+    async clickOnProductAndCheckRemove(proName : string | string[]){
 
-    async clickOnProductAndCheckRemove(proName : string){
-        const element = this.page.locator("//div[@class='inventory_item']//a/div[contains(text(),'"+proName+"')]/parent::a/parent::div/following-sibling::div//button");
+        for(const val of proName){
+            let element = this.page.locator("//div[@class='inventory_item']//a/div[contains(text(),'"+val+"')]/parent::a/parent::div/following-sibling::div//button");
         await element.click();
         await expect(element).toContainText("Remove");
+        }
+
+        // let element = this.page.locator("//div[@class='inventory_item']//a/div[contains(text(),'"+proName+"')]/parent::a/parent::div/following-sibling::div//button");
+        // await element.click();
+        // await expect(element).toContainText("Remove");
     }
+
+    /**
+     * Clicks on the Cart Icon.
+     */
+    async clickCartIcon(){
+        await this.cartIcon.click();
+        await expect(this.yourCartLabel).toContainText("Your Cart");
+    }
+
+
 
 }

@@ -41,7 +41,7 @@ export default defineConfig({
     headless: false,
     // Optional: Slow down actions by X milliseconds to make human-observation easier
     launchOptions: {
-      slowMo: 500, 
+      slowMo: 2000, 
     },
   },
 
