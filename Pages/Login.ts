@@ -4,10 +4,10 @@ export class Login{
 
     // These are the declaration of the properties.
     // And you need to initialise those in the constructor.
-    readonly page : Page;
-    readonly userNameTextBox : Locator;
-    readonly passwordTextBox : Locator;
-    readonly loginButton : Locator;
+    private readonly page : Page;
+    private readonly userNameTextBox : Locator;
+    private readonly passwordTextBox : Locator;
+    private readonly loginButton : Locator;
 
 
     constructor(page: Page){
@@ -20,7 +20,7 @@ export class Login{
     /**
      * This method will login into the application.
      */
-    async login(userName : string, password : string){
+    async login(userName : string, password : string): Promise<void>{
         await this.userNameTextBox.fill(userName);
         await this.passwordTextBox.fill(password);
         await this.loginButton.click();

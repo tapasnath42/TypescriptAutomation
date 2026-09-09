@@ -65,6 +65,12 @@ export class Dashboard{
         await expect(this.yourCartLabel).toContainText("Your Cart");
     }
 
+    async fun(num : number[]): Promise<number[]>{
+        return num; 
+    }
+
+
+
 
 
 }

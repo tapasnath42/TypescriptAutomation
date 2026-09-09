@@ -16,13 +16,14 @@ const isCI = Boolean(
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: './tests',
+  testDir: './',
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: isCI,
   /* Retry on CI only */
   retries: isCI ? 2 : 0,
+  
   /* Opt out of parallel tests on CI. */
   workers: isCI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
@@ -43,9 +44,16 @@ export default defineConfig({
     launchOptions: {
       slowMo: 2000, 
     },
+
+    navigationTimeout:10000,
+    actionTimeout: 15000,
+
   },
 
-  
+  timeout: 30000,
+  expect:{
+    timeout:5000,
+  },
 
   /* Configure projects for major browsers */
   projects: [

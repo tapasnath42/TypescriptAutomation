@@ -2,14 +2,15 @@
 import { expect, Locator, Page } from "@playwright/test";
 import { Dashboard } from "./Dashboard";
 
-export class CartPage{
+export class CartPage extends Dashboard{
 
-    readonly page : Page;
-    readonly continueShopping : Locator;
-    readonly checkout : Locator;
-    readonly cartItem : Locator;
+     readonly page : Page;
+    private readonly continueShopping : Locator;
+    private readonly checkout : Locator;
+    private readonly cartItem : Locator;
 
     constructor(page: Page){
+        super(page);
         this.page = page;
         this.continueShopping = page.getByRole('button', { name: 'Continue Shopping' })
         this.checkout = page.getByRole('button', { name: 'Checkout' })
@@ -25,6 +26,9 @@ export class CartPage{
             await expect(this.page.locator("(//div[@class='cart_item']//a/div/../following-sibling::div//button)["+(i+1)+"]")).toContainText("Remove");
         }
 
+        this.clickCartIcon();
+        this.newfun();
+
         await expect(this.continueShopping).toBeVisible();
         await expect(this.continueShopping).toBeEnabled();
 
@@ -37,7 +41,19 @@ export class CartPage{
      * This is the example method.
      * @returns 
      */
-   async newfun(): Promise<string>{
+   private async newfun(): Promise<string>{
+        //return "";
+
+         let str: string = "";
+         console.log(typeof str);
+         return str;
+   }
+
+   /**
+     * This is the example method.
+     * @returns 
+     */
+    async clickCartIcon(): Promise<string>{
         //return "";
 
          let str: string = "";
