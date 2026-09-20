@@ -4,7 +4,7 @@ import { Dashboard } from "./Dashboard";
 
 export class CartPage extends Dashboard{
 
-     readonly page : Page;
+    readonly page : Page;
     private readonly continueShopping : Locator;
     private readonly checkout : Locator;
     private readonly cartItem : Locator;
@@ -49,20 +49,14 @@ export class CartPage extends Dashboard{
          return str;
    }
 
-   /**
-     * This is the example method.
-     * @returns 
-     */
-    async clickCartIcon(): Promise<string>{
-        //return "";
-
-         let str: string = "";
-         console.log(typeof str);
-         return str;
+   static async fun1(): Promise<void>{
+        console.log("this is the static method.");
    }
 
-
+   
 
 }
+
+
 
 

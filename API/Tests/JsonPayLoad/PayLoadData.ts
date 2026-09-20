@@ -2,8 +2,8 @@
 export class PayLoadData{
 
     UpdateBookingJsonPayLoadData = {
-        "firstname" : "Hiren",
-    "lastname" : "Hill1",
+    "firstname" : "John",
+    "lastname" : "Cena",
     "totalprice" : 523,
     "depositpaid" : true,
     "bookingdates" : {

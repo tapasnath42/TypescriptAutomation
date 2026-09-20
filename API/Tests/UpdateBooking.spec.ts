@@ -8,13 +8,17 @@ test("Update Booking", async ({request})=> {
     const jsonPayLoadData = new PayLoadData().UpdateBookingJsonPayLoadData;
     const authToken = await new GetToken().getTheToken(request);
 
-    const response = await request.put("https://restful-booker.herokuapp.com/booking/800", ({headers:{
+    const response = await request.put("https://restful-booker.herokuapp.com/booking/800", 
+        ({headers:{
         "Content-Type":"application/json",
         "Accept":"application/json",
         "Cookie": "token=" + authToken,
     },
+    params:{
+
+    },
     data: jsonPayLoadData,
-}))
+}));
     
     const responseBody = await response.text();
     console.log(typeof responseBody);

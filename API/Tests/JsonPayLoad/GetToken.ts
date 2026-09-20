@@ -5,14 +5,16 @@ export class GetToken{
 
       tokenPayLoadData = new PayLoadData().createTokenJsonData;
 
-async getTheToken(apiContext: APIRequestContext): Promise<string>{
-  const response = await apiContext.post(
+async getTheToken(request: APIRequestContext): Promise<string>{
+  const response = await request.post(
     "https://restful-booker.herokuapp.com/auth",
     {
       headers: {
         "Content-Type": "application/json",
       },
       data: this.tokenPayLoadData,
+      params:{
+      }
     }
   );
 

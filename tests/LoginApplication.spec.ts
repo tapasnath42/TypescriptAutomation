@@ -2,6 +2,7 @@ import { expect, test } from "@playwright/test";
 import { Login } from "../Pages/Login";
 import { Dashboard } from "../Pages/Dashboard";
 import { CartPage } from "../Pages/CartPage";
+import { ElementNotFoundError } from "../tests/CustomException";
 
 
 test("Verify login into the application", async ({page}) => {
@@ -26,7 +27,14 @@ test("Verify login into the application", async ({page}) => {
 
         await cartPageObj.verifyProductCartPage(arr);
 
-        await page.waitForTimeout(5000);
-
+        try{
+                await page.waitForTimeout(5000);
+        }catch{
+                throw new ElementNotFoundError("not found", "this locator not found.");
+        }finally{
+                
+        }
+       
+        CartPage.fun1();
 
 });
