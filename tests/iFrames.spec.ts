@@ -12,9 +12,13 @@ test("IFrames", async ({page}) => {
     frame.getByRole('button', {name: ''}).click();
 
     const frame1 = page.frameLocator().frameLocator();
+    const frame2 = page.frameLocator();
     frame1.locator("").waitFor({state: 'visible'});
 
     page.locator("", {has: page.locator("")}).click();
+
+    page.frames();
+    page.frame("");
 
 
     //=====================================================

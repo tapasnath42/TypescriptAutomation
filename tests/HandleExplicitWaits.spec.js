@@ -1,6 +1,6 @@
-import {test, expect} from "@playwright/test";
+import { test, expect } from "@playwright/test";
 
-test("Explicit waits", async({page}) => {
+test("Explicit waits", async ({ page }) => {
 
     // How do you handle explicit waits?
 
@@ -12,9 +12,9 @@ test("Explicit waits", async({page}) => {
     await page.waitForLoadState('networkidle');
 
     // Wait for specific element state
-    await page.locator('#button').waitFor({ state: 'visible'});
-    await page.locator('#button').waitFor({ state: 'visible'}, {timeout:3000});
-    await page.locator('#button').waitFor({ state: 'visible' , timeout: 3000});
+    await page.locator('#button').waitFor({ state: 'visible' });
+    await page.locator('#button').waitFor({ state: 'visible' }, { timeout: 3000 });
+    await page.locator('#button').waitFor({ state: 'visible', timeout: 3000 });
 
     // Wait for URL
     await page.waitForURL('**/dashboard');

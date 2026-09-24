@@ -1,4 +1,14 @@
 import { defineConfig, devices } from '@playwright/test';
+import dotenv from "dotenv";
+import path from "path";
+
+const environment = process.env.ENV ?? "QA";
+const environmentFile = path.resolve(__dirname, `TestData/.env.${environment}`);
+const environmentConfig = dotenv.config({ path: environmentFile });
+
+// if (environmentConfig.error) {
+//   throw new Error(`Unable to load environment file for ENV=${environment}: ${environmentFile}`);
+// }
 
 const isCI = Boolean(
   (globalThis as { process?: { env?: { CI?: string } } }).process?.env?.CI,
@@ -28,9 +38,10 @@ export default defineConfig({
   workers: isCI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   //reporter: 'html',
-  reporter: [ ['html'],
-    ['allure-playwright', { resultsDir: 'allure-results' }] // Generates Allure data
-  ],
+  // reporter: [ ['html'],
+  //   ['allure-playwright', { resultsDir: 'allure-results' }] // Generates Allure data
+  // ],
+  reporter: process.env.CI ? 'blob' : 'html',
 
   timeout: 30000,
   expect:{
@@ -53,7 +64,7 @@ export default defineConfig({
     },
 
     screenshot:'on',
-
+    video: 'on',
     navigationTimeout:10000,
     actionTimeout: 15000,
 
@@ -61,9 +72,22 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
+
+    {
+      name: 'setup',
+      testMatch: 'GlobalSetupTeardown/GlobalSetup.ts',
+      teardown: 'teardown',
+    },
+
+    {
+      name : 'teardown',
+      testMatch: 'GlobalSetupTeardown/GlobalTeardown.ts',
+    },
+
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
+      dependencies: ['setup'],
     },
 
     // {
